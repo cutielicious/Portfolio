@@ -24,6 +24,7 @@
             --shadow: rgba(0, 0, 0, 0.8);         /* Deep, heavy shadows */
             --accent-glow: rgba(236, 72, 153, 0.15); /* Soft pink neon glow */
             --pill-bg: rgba(56, 189, 248, 0.1);    /* Soft transparent blue for tags */
+            --contact-hover-border: #ec4899;      /* Hot pink for dark mode hover */
         }
 
         :root[data-theme="light"] {
@@ -39,10 +40,11 @@
             --shadow: rgba(15, 23, 42, 0.05);     /* Minimalist light shadow */
             --accent-glow: rgba(2, 132, 199, 0.05);  /* Soft blue glow */
             --pill-bg: rgba(219, 39, 119, 0.08);   /* Soft transparent pink for tags */
+            --contact-hover-border: #2563eb;      /* Clean blue for light mode hover */
         }
 
         /* 
-           2. CUSTOM CURSOR STYLES
+           2. YOUR ORIGINAL CUSTOM CURSOR STYLES
             */
         html, body, a, button, input, textarea, .project-card, .theme-btn, .tech-pill {
             cursor: none !important;
@@ -328,11 +330,10 @@
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 16px;
-            overflow: hidden; /* Ensures image boundaries match border radius */
+            overflow: hidden; 
             box-shadow: 0 10px 30px var(--shadow);
             display: flex;
             flex-direction: column;
-            justify-content: transform;
         }
 
         .project-card:hover {
@@ -502,93 +503,97 @@
             font-weight: bold;
         }
 
-        /* --- COMMUNITY & LEADERSHIP SECTIONS --- */
-        .leadership-grid {
+        /* --- CONTACT SECTION MAIN DESIGN --- */
+        .contact-section {
+            padding: 80px 0 50px 0;
+            text-align: center;
+        }
+
+        .contact-heading {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            margin-bottom: 35px;
+            font-weight: 800;
+            color: var(--text-main);
+            position: relative;
+            display: inline-block;
+        }
+
+        .contact-heading::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -6px;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
+            margin-bottom: 40px;
             margin-top: 20px;
         }
 
-        .leadership-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px var(--shadow);
-        }
-
-        .leadership-card h3 {
-            color: var(--accent);
-            font-size: 1.25rem;
-            margin-bottom: 5px;
-        }
-
-        .leadership-card span {
-            display: block;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 10px;
-            font-weight: 500;
-        }
-
-        /* --- CONTACT --- */
-        .contact-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 40px;
-        }
-
-        .contact-info-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
+        .contact-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--card-bg);
             padding: 30px;
             border-radius: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .info-block h4 {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        .info-block p {
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .form-group label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .form-group input, .form-group textarea {
-            background-color: var(--card-bg);
             border: 1px solid var(--card-border);
             color: var(--text-main);
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 1rem;
-            outline: none;
+            text-decoration: none;
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: var(--accent);
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--contact-hover-border) !important; 
+            box-shadow: 0 12px 30px var(--shadow);
+        }
+
+        .card-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        /* Cohesive light mode styling (Black, Blue, White) */
+        .email-card .card-label { color: #2563eb; }     
+        .linkedin-card .card-label { color: #0077b5; }  
+        .github-card .card-label { color: #4b5563; }    
+        .instagram-card .card-label { color: #3b82f6; } 
+
+        /* Overrides label colors in dark mode to preserve neon layout balance */
+        :root[data-theme="dark"] .email-card .card-label { color: #ec4899; }
+        :root[data-theme="dark"] .linkedin-card .card-label { color: #0077b5; }
+        :root[data-theme="dark"] .github-card .card-label { color: #38bdf8; }
+        :root[data-theme="dark"] .instagram-card .card-label { color: #e1306c; }
+
+        .card-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        .contact-phone {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 25px;
+        }
+
+        .contact-phone strong {
+            color: var(--text-main);
+            font-weight: 700;
         }
 
         /* --- RESPONSIVE --- */
@@ -604,7 +609,7 @@
             .hero-buttons {
                 justify-content: center;
             }
-            .about-content, .contact-wrapper {
+            .about-content {
                 grid-template-columns: 1fr;
             }
             .skills-grid {
@@ -664,7 +669,8 @@
             </div>
         </container>
     </section>
-<!-- PROJECTS SECTION -->
+
+    <!-- PROJECTS SECTION -->
     <section id="projects">
         <container>
             <h2 class="section-title">Projects</h2>
@@ -709,6 +715,7 @@
             </div>
         </container>
     </section>
+
     <!-- TECH STACK TICKER SECTION -->
     <section class="tech-ticker-section">
         <container style="text-align: center; margin-bottom: 20px;">
@@ -743,21 +750,15 @@
         <container class="about-content">
           <div>
                 <h2 class="section-title">About Me</h2>
-                
-                <!-- Paragraph 1: Tech, Education & Teamwork -->
                 <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 1rem; line-height: 1.6;">
                     I am a full-stack developer and a final-year Information Technology student at North-West University. My main focus is on building efficient database systems, writing clean code, and creating practical software applications. I work very well in team projects, where I can collaborate with others to turn logical ideas into useful software for users.
                 </p>
-                
-                <!-- Paragraph 2: Lifestyle, Balance & Humour -->
                 <p style="color: var(--text-muted); margin-bottom: 15px; font-size: 1rem; line-height: 1.6;">
                     Outside of software development, I love going on adventures and exploring different types of food. I believe in keeping a positive and active work environment, using my good sense of humor to keep team spirit high. I think the best development teams are the ones that work hard while maintaining a happy, friendly, and high-energy atmosphere.
                 </p>
             </div>
             <div>
                 <h2 class="section-title">Education History</h2>
-                
-                <!-- Styled Timeline Container -->
                 <div class="education-timeline" style="position: relative; border-left: 2px solid var(--accent); padding-left: 20px; margin-left: 10px;">
                     
                     <!-- 1. University -->
@@ -830,154 +831,109 @@
         </container>
     </section>
 
-  <!-- CONTACT SECTION -->
-    <section id="contact">
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact-section">
         <container>
-            <h2 class="section-title">Contact Me</h2>
-            <p style="color: var(--text-muted); text-align: center; margin-bottom: 30px; font-size: 1.05rem;">
-                Let's connect! Feel free to reach out via email or follow my professional and personal journey below.
-            </p>
-            
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; max-width: 500px; margin: 0 auto;">
+            <h2 class="contact-heading">Contact</h2>
+
+            <!-- Direct Connect Grid -->
+            <div class="contact-grid">
                 
-                <!-- Email Contact Card -->
-                <div style="width: 100%; background: var(--card-bg); padding: 20px; border-radius: 16px; text-align: center; border: 1px solid var(--card-border); box-shadow: 0 10px 30px var(--shadow);">
-                    <span style="font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 5px; font-size: 0.8rem; text-transform: uppercase;">Email Address</span>
-                    <a href="mailto:Khuthadzomudau22@gmail.com" style="color: var(--accent); text-decoration: none; font-size: 1.15rem; font-weight: 600;">Khuthadzomudau22@gmail.com</a>
-                </div>
+                <!-- Email Card -->
+                <a href="mailto:Khuthadzomudau22@gmail.com" class="contact-card email-card">
+                    <span class="card-label">Direct Email</span>
+                    <span class="card-value">Khuthadzomudau22@gmail.com</span>
+                </a>
 
-                <!-- Social Links Grid -->
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; width: 100%;">
-                    
-                    <!-- LinkedIn Link -->
-                    <a href="https://www.linkedin.com/in/khuthadzo-mudau-271028423?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" target="_blank" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--card-bg); padding: 20px; border-radius: 16px; text-decoration: none; border: 1px solid var(--card-border); box-shadow: 0 10px 30px var(--shadow); transition: transform 0.2s;" onmouseenter="this.style.transform='translateY(-2px)';" onmouseleave="this.style.transform='translateY(0)';">
-                        <span style="color: #0077b5; font-weight: 700; font-size: 1.1rem; margin-bottom: 4px;">LinkedIn</span>
-                        <span style="color: var(--text-muted); font-size: 0.8rem; text-align: center;">khuthadzo mudau</span>
-                    </a>
+                <!-- LinkedIn Profile -->
+                <a href="https://www.linkedin.com/in/khuthadzo-mudau-271028423?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" target="_blank" class="contact-card linkedin-card">
+                    <span class="card-label">LinkedIn</span>
+                    <span class="card-value">@khuthadzo mudau</span>
+                </a>
 
-                    <!-- GitHub Link -->
-                    <a href="https://github.com/cutielicious" target="_blank" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--card-bg); padding: 20px; border-radius: 16px; text-decoration: none; border: 1px solid var(--card-border); box-shadow: 0 10px 30px var(--shadow); transition: transform 0.2s;" onmouseenter="this.style.transform='translateY(-2px)';" onmouseleave="this.style.transform='translateY(0)';">
-                        <span style="color: var(--text-main); font-weight: 700; font-size: 1.1rem; margin-bottom: 4px;">GitHub</span>
-                        <span style="color: var(--text-muted); font-size: 0.8rem; text-align: center;">@cutielicious</span>
-                    </a>
+                <!-- GitHub Profile -->
+                <a href="https://github.com/cutielicious" target="_blank" class="contact-card github-card">
+                    <span class="card-label">GitHub</span>
+                    <span class="card-value">@cutielicious</span>
+                </a>
 
-                    <!-- Instagram Link -->
-                    <a href="https://www.instagram.com/Cutielicious" target="_blank" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--card-bg); padding: 20px; border-radius: 16px; text-decoration: none; border: 1px solid var(--card-border); box-shadow: 0 10px 30px var(--shadow); transition: transform 0.2s;" onmouseenter="this.style.transform='translateY(-2px)';" onmouseleave="this.style.transform='translateY(0)';">
-                        <span style="color: #e1306c; font-weight: 700; font-size: 1.1rem; margin-bottom: 4px;">Instagram</span>
-                        <span style="color: var(--text-muted); font-size: 0.8rem; text-align: center;">@Cutielicious</span>
-                    </a>
+                <!-- Instagram Link -->
+                <a href="https://www.instagram.com/khuthi.mudau?igsh=em1iejgwdDQ2ZjEz" target="_blank" class="contact-card instagram-card">
+                    <span class="card-label">Social Media</span>
+                    <span class="card-value">@khuthi.mudau</span>
+                </a>
 
-                </div>
             </div>
+
+            <!-- Phone Number Details -->
+            <p class="contact-phone">
+                Prefer a phone call? Reach me directly at: <strong>071 263 0364</strong>
+            </p>
         </container>
     </section>
-    <!--
-        4. INTEGRATED JAVASCRIPT CONTROLLERS
-        */ -->
+
+    <!-- INTERACTIVE JAVASCRIPT HANDLERS -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Theme Switcher ---
-            const themeToggleBtn = document.getElementById('themeToggleBtn');
-            const themeBtnText = document.getElementById('themeBtnText');
-            const rootElement = document.documentElement;
+    const cursorOuter = document.querySelector('.custom-cursor-outer');
+    const cursorInner = document.querySelector('.custom-cursor-inner');
+    
+    // Check if they exist to prevent crashes
+    if (!cursorOuter || !cursorInner) return;
 
-            const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
-            setTheme(savedTheme);
+    let mouseX = 0, mouseY = 0;
+    let outerX = 0, outerY = 0;
 
-            themeToggleBtn.addEventListener('click', () => {
-                const currentTheme = rootElement.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                setTheme(newTheme);
-            });
+    // 1. Just track mouse position
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Inner circle stays on mouse (no lag)
+        cursorInner.style.left = `${mouseX}px`;
+        cursorInner.style.top = `${mouseY}px`;
+    });
 
-            function setTheme(theme) {
-                rootElement.setAttribute('data-theme', theme);
-                localStorage.setItem('portfolio-theme', theme);
-                themeBtnText.innerHTML = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+    // 2. Animate the outer circle with "lag"
+    const animate = () => {
+        outerX += (mouseX - outerX) * 0.15; // 0.15 is the lag speed
+        outerY += (mouseY - outerY) * 0.15;
+        
+        cursorOuter.style.left = `${outerX}px`;
+        cursorOuter.style.top = `${outerY}px`;
+        
+        requestAnimationFrame(animate);
+    };
+    animate();
+
+    // 3. Hover Tracking
+    const interactiveElements = document.querySelectorAll('a, button, .project-card, .theme-btn, .tech-pill');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursorOuter.classList.add('hovered');
+            cursorInner.classList.add('hovered');
+        });
+        el.addEventListener('mouseleave', () => {
+            cursorOuter.classList.remove('hovered');
+            cursorInner.classList.remove('hovered');
+        });
+    });
+});
+
+        // Light/Dark Theme Switching Module
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const themeBtnText = document.getElementById('themeBtnText');
+        const htmlElement = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                htmlElement.setAttribute('data-theme', 'light');
+                themeBtnText.textContent = '🌙 Dark';
+            } else {
+                htmlElement.setAttribute('data-theme', 'dark');
+                themeBtnText.textContent = '☀️ Light';
             }
-
-            // --- Smooth Scroll Alignment ---
-            const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetSection = document.querySelector(targetId);
-                    
-                    if (targetSection) {
-                        const navbarHeight = document.querySelector('header').offsetHeight;
-                        const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-
-            // --- Reveal-on-Scroll Trigger Animation ---
-            const revealElements = document.querySelectorAll('.project-card, .skills-category, .leadership-card');
-            const revealOnScroll = () => {
-                const triggerBottom = window.innerHeight * 0.9;
-                revealElements.forEach(el => {
-                    const elTop = el.getBoundingClientRect().top;
-                    if (elTop < triggerBottom) {
-                        el.style.opacity = '1';
-                        el.style.transform = 'translateY(0)';
-                    }
-                });
-            };
-
-            revealElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-            });
-
-            window.addEventListener('scroll', revealOnScroll);
-            revealOnScroll();
-
-            // --- Custom Interactive Cursor Logic ---
-            const cursorOuter = document.querySelector('.custom-cursor-outer');
-            const cursorInner = document.querySelector('.custom-cursor-inner');
-
-            let mouseX = -100;
-            let mouseY = -100;
-            let outerX = -100;
-            let outerY = -100;
-
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                
-                cursorInner.style.left = `${mouseX}px`;
-                cursorInner.style.top = `${mouseY}px`;
-            });
-
-            function animateCursor() {
-                outerX += (mouseX - outerX) * 0.15;
-                outerY += (mouseY - outerY) * 0.15;
-
-                cursorOuter.style.left = `${outerX}px`;
-                cursorOuter.style.top = `${outerY}px`;
-
-                requestAnimationFrame(animateCursor);
-            }
-            animateCursor();
-
-            // Cursor morph animations on hover
-            const targetHoverables = document.querySelectorAll('a, button, input, textarea, .project-card, .tech-pill');
-            targetHoverables.forEach(item => {
-                item.addEventListener('mouseenter', () => {
-                    cursorOuter.classList.add('hovered');
-                    cursorInner.classList.add('hovered');
-                });
-                item.addEventListener('mouseleave', () => {
-                    cursorOuter.classList.remove('hovered');
-                    cursorInner.classList.remove('hovered');
-                });
-            });
         });
     </script>
 </body>

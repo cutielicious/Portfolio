@@ -1,72 +1,57 @@
-
-/* 
-   CUSTOM CURSOR STYLES
-  */
-
-/* Hide default cursor everywhere */
-html, body, a, button, input, textarea, .project-card, .theme-btn {
+/* 2. CUSTOM CURSOR STYLES */
+html, body, a, button, input, textarea, .project-card, .theme-btn, .tech-pill, .contact-card {
     cursor: none !important;
 }
 
-/* Outer black circle */
+.custom-cursor-outer, .custom-cursor-inner {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 50%;
+}
+
 .custom-cursor-outer {
     width: 32px;
     height: 32px;
-    border: 2px solid #000000; /* Black outer ring */
-    background-color: rgba(0, 0, 0, 0.05); /* Very subtle dark fill */
-    border-radius: 50%;
+    border: 2px solid var(--cursor-outer); 
+    background-color: rgba(0, 0, 0, 0.05); /* Slight fill so it's visible on white/black */
     position: fixed;
-    transform: translate(-50%, -50%);
-    pointer-events: none; /* Let clicks pass through to items below */
-    z-index: 9999;
-    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-}
-
-/* Inner pink dot */
-.custom-cursor-inner {
-    width: 6px;
-    height: 6px;
-    background-color: #ec4899; /* Neon pink center dot */
-    border-radius: 50%;
-    position: fixed;
-    transform: translate(-50%, -50%);
     pointer-events: none;
-    z-index: 10000; /* Keeps pink dot above the black circle */
-    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+    z-index: 9999;
+    border-radius: 50%;
+    transform: translate(-16px, -16px); /* Centers the ring on the mouse */
 }
 
-/* --- Interactive Hover Effects --- */
-/* When hovering over clickable links, buttons, or cards */
+.custom-cursor-inner {
+    width: 8px;
+    height: 8px;
+    background-color: var(--cursor-inner); 
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    border-radius: 50%;
+    transform: translate(-4px, -4px); /* Centers the dot on the mouse */
+}
+/* Dark Mode: Neon Pink Dot, Black Ring */
+:root[data-theme="dark"] {
+    --cursor-inner: #ec4899; /* Neon Pink Dot */
+    --cursor-outer: #000000; /* Black Ring */
+}
+
+/* Light Mode: Blue Dot, Black Ring */
+:root[data-theme="light"] {
+    --cursor-inner: #0284c7; /* Electric Royal Blue Dot */
+    --cursor-outer: #000000; /* Black Ring */
+}
+
 .custom-cursor-outer.hovered {
     width: 44px;
     height: 44px;
-    border-color: #ec4899; /* Turns the outer ring pink */
-    background-color: rgba(236, 72, 153, 0.1); /* Soft pink neon glow */
+    border-color: var(--cursor-color);
 }
 
-.custom-cursor-inner.hovered {
-    width: 8px;
-    height: 8px;
-    background-color: #38bdf8; /* The center dot swaps to electric blue */
-}
 
-/* Custom Cursor Interactive Hover Styles */
-.custom-cursor-outer.hovered {
-    width: 44px !important;
-    height: 44px !important;
-    border-color: #ec4899 !important; /* Turns pink on hover */
-    background-color: rgba(236, 72, 153, 0.1) !important; /* Soft glowing background */
-}
-
-.custom-cursor-inner.hovered {
-    width: 8px !important;
-    height: 8px !important;
-    background-color: #38bdf8 !important; /* Center dot turns electric blue on hover */
-}
-
-/* 
-           TECHNOLOGY TICKER STYLES
-          */
+/* TECHNOLOGY TICKER STYLES */
         .tech-ticker-section {
             padding: 60px 0 20px 0;
             overflow: hidden;
@@ -136,7 +121,18 @@ html, body, a, button, input, textarea, .project-card, .theme-btn {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
         }
+    :root[data-theme="dark"] {
+        /* ... existing dark variables ... */
+        --about-border: #1e1b29;      /* Default dark border */
+        --about-hover: #ec4899;       /* Pink on hover */
+       }
 
+    :root[data-theme="light"] {
+        /* ... existing light variables ... */
+        --about-border: #e2e8f0;      /* Default light border */
+        --about-hover: #0284c7;       /* Blue on hover */
+    }
+    
         /* Infinite horizontal scroll animation */
         @keyframes scroll-ticker {
             0% {
@@ -442,75 +438,53 @@ section {
     border-radius: 4px;
 }
 
-/* 
-   6. PROJECTS GRID (Card Aesthetics)
-    */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
-}
-
+/* --- PROJECTS CARD */
 .project-card {
     background-color: var(--card-bg);
-    border: 1px solid var(--card-border);
+    /* 1. If you want NO BORDER at all, set this to 0 */
+    border: 0px solid transparent; 
     border-radius: 16px;
     padding: 32px;
-    box-shadow: 0 10px 30px var(--shadow);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
     overflow: hidden;
-}
-
-.project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background-color: transparent;
-    transition: background-color 0.3s ease;
+    transition: transform 0.3s ease; /* Removed border-color from transition */
+    box-shadow: none !important;
 }
 
 .project-card:hover {
     transform: translateY(-6px);
-    border-color: rgba(56, 189, 248, 0.3);
-    box-shadow: 0 20px 40px var(--accent-glow);
+    /* 2. Explicitly ensure no border color change happens */
+    border: 0px solid transparent; 
+    box-shadow: none !important;
+    filter: none !important;
 }
 
-.project-card:hover::before {
-    background-color: var(--accent);
+/* --- CONTACT CARD (Cleaned) --- */
+.contact-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid var(--card-border);
+    color: var(--text-main);
+    text-decoration: none;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+    box-shadow: none !important;
 }
 
-.project-card h3 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    margin-bottom: 8px;
+.contact-card:hover {
+    transform: translateY(-5px);
+    /* Keep the pink border for contact cards as you requested, or change to var(--accent) */
+    border-color: #ec4899; 
+    box-shadow: none !important;
+    filter: none !important;
 }
-
-.project-tag {
-    font-size: 0.75rem;
-    color: var(--accent);
-    background-color: var(--pill-bg);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 4px 12px;
-    border-radius: 30px;
-    display: inline-block;
-    margin-bottom: 20px;
-}
-
-.project-card p {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    margin-bottom: 20px;
-}
-
 /* 
    7. ABOUT & EDUCATION SECTIONS
    */
@@ -720,9 +694,163 @@ section {
     border-color: var(--accent);
     box-shadow: 0 0 0 3px var(--accent-glow);
 }
+   /* Layout & Container Alignment */
+.contact-section {
+    padding: 100px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Heading - Solid color matching theme, supports standard background-clip */
+.contact-heading {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin-bottom: 25px;
+    font-weight: 800;
+    color: var(--text-main, #111111);
+}
+
+/* Grid Layout */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+/* Smooth, Non-Glitching Cards */
+.contact-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg, #ffffff);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid var(--card-border, #e5e7eb);
+    color: var(--text-main, #111111);
+    text-decoration: none;
+    box-shadow: 0 4px 20px var(--shadow, rgba(0, 0, 0, 0.05));
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Glitch-Free Pink Border Hover State */
+.contact-card:hover {
+    transform: translateY(-4px);
+    border-color: #ec4899; /* Smooth pink border accent line */
+    box-shadow: 0 10px 25px var(--shadow, rgba(0, 0, 0, 0.1));
+}
+
+/* Interior Content Labels */
+.card-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #0077b5; /* Professional blue theme colors */
+}
+
+.card-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    word-break: break-all;
+}
+
+/* Optional Custom Accents Per Service Label */
+.email-card .card-label { color: #2563eb; }     /* Clean Blue */
+.linkedin-card .card-label { color: #0077b5; }  /* LinkedIn Blue */
+.github-card .card-label { color: #4b5563; }    /* Dark Gray/Black */
+.instagram-card .card-label { color: #4f46e5; } /* Royal Indigo */
 
 /* 
-   10. MEDIA QUERIES (Mobile Responsiveness)
+   CONTACT SECTION STYLES
+ */
+
+/* Main Section Wrapper */
+.contact-section {
+    padding: 100px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Heading - Solid color matching theme, supports standard background-clip */
+.contact-heading {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin-bottom: 35px;
+    font-weight: 800;
+    color: var(--text-main, #111111);
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+/* Response Grid Layout */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+/* Smooth, Non-Glitching Base Cards */
+.contact-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg, #ffffff);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid var(--card-border, #e5e7eb);
+    color: var(--text-main, #111111);
+    text-decoration: none;
+    box-shadow: 0 4px 20px var(--shadow, rgba(0, 0, 0, 0.05));
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Glitch-Free Pink Border Hover State */
+.contact-card:hover {
+    transform: translateY(-5px);
+    border-color: #ec4899; /* Clean hot pink border outline on hover */
+    box-shadow: 0 12px 30px var(--shadow, rgba(0, 0, 0, 0.12));
+}
+
+/* Interior Service Sub-labels (Light Mode Blue/Gray Hierarchy) */
+.card-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+/* Color codes mapping labels to your blue/white/black theme */
+.email-card .card-label { color: #2563eb; }     /* Royal Blue */
+.linkedin-card .card-label { color: #0077b5; }  /* LinkedIn Brand Blue */
+.github-card .card-label { color: #4b5563; }    /* Charcoal/Black */
+.instagram-card .card-label { color: #3b82f6; } /* Sky Blue */
+
+/* Main Username / Address Display text */
+.card-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    word-break: break-all;
+}
+
+/* Call Info Layout Text */
+.contact-phone {
+    color: var(--text-muted, #4b5563);
+    font-size: 0.95rem;
+    margin-top: 25px;
+}
+
+.contact-phone strong {
+    color: var(--text-main, #111111);
+    font-weight: 700;
+}
+/* 
+    MEDIA QUERIES (Mobile Responsiveness)
   */
 @media (max-width: 968px) {
     .hero-wrapper {
