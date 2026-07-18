@@ -1,72 +1,65 @@
 
-/* ==========================================================================
-   CUSTOM CURSOR STYLES
-   ========================================================================== */
+/* 
+           2. CUSTOM CURSOR STYLES (High-Contrast Neon Edition)
+           */
+        html, body, a, button, input, textarea, .project-card, .theme-btn, .tech-pill {
+            cursor: none !important;
+        }
 
-/* Hide default cursor everywhere */
-html, body, a, button, input, textarea, .project-card, .theme-btn {
-    cursor: none !important;
-}
+        .custom-cursor-outer {
+            width: 32px;
+            height: 32px;
+            /* High-contrast neon pink outline so it glows beautifully on pure black */
+            border: 2px solid #ec4899; 
+            background-color: rgba(236, 72, 153, 0.05);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
 
-/* Outer black circle */
-.custom-cursor-outer {
-    width: 32px;
-    height: 32px;
-    border: 2px solid #000000; /* Black outer ring */
-    background-color: rgba(0, 0, 0, 0.05); /* Very subtle dark fill */
-    border-radius: 50%;
-    position: fixed;
-    transform: translate(-50%, -50%);
-    pointer-events: none; /* Let clicks pass through to items below */
-    z-index: 9999;
-    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-}
+        /* Tweaks outline slightly for the light theme so it stays visible */
+        :root[data-theme="light"] .custom-cursor-outer {
+            border-color: #0284c7;
+            background-color: rgba(2, 132, 199, 0.03);
+        }
 
-/* Inner pink dot */
-.custom-cursor-inner {
-    width: 6px;
-    height: 6px;
-    background-color: #ec4899; /* Neon pink center dot */
-    border-radius: 50%;
-    position: fixed;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 10000; /* Keeps pink dot above the black circle */
-    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
-}
+        .custom-cursor-inner {
+            width: 6px;
+            height: 6px;
+            /* Vibrant neon pink inner core */
+            background-color: #ec4899; 
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+        }
 
-/* --- Interactive Hover Effects --- */
-/* When hovering over clickable links, buttons, or cards */
-.custom-cursor-outer.hovered {
-    width: 44px;
-    height: 44px;
-    border-color: #ec4899; /* Turns the outer ring pink */
-    background-color: rgba(236, 72, 153, 0.1); /* Soft pink neon glow */
-}
+        /* Hover animation states for projects, links, and buttons */
+        .custom-cursor-outer.hovered {
+            width: 48px !important;
+            height: 48px !important;
+            border-color: #38bdf8 !important; /* Swaps to Electric Cyan Blue on hover */
+            background-color: rgba(56, 189, 248, 0.1) !important; 
+        }
 
-.custom-cursor-inner.hovered {
-    width: 8px;
-    height: 8px;
-    background-color: #38bdf8; /* The center dot swaps to electric blue */
-}
+        .custom-cursor-inner.hovered {
+            width: 10px !important;
+            height: 10px !important;
+            background-color: #38bdf8 !important; 
+        }
 
-/* Custom Cursor Interactive Hover Styles */
-.custom-cursor-outer.hovered {
-    width: 44px !important;
-    height: 44px !important;
-    border-color: #ec4899 !important; /* Turns pink on hover */
-    background-color: rgba(236, 72, 153, 0.1) !important; /* Soft glowing background */
-}
-
-.custom-cursor-inner.hovered {
-    width: 8px !important;
-    height: 8px !important;
-    background-color: #38bdf8 !important; /* Center dot turns electric blue on hover */
-}
-
-/* ==========================================================================
-           TECHNOLOGY TICKER STYLES
-           ========================================================================== */
+/*
+TECHNOLOGY TICKER STYLES
+         */
         .tech-ticker-section {
             padding: 60px 0 20px 0;
             overflow: hidden;
@@ -146,9 +139,9 @@ html, body, a, button, input, textarea, .project-card, .theme-btn {
                 transform: translate3d(-50%, 0, 0);
             }
         }
-/* ==========================================================================
+/* 
    1. CSS VARIABLES & THEME DEFINITIONS
-   ========================================================================== */
+   */
 
    
 :root[data-theme="dark"] {
@@ -179,9 +172,9 @@ html, body, a, button, input, textarea, .project-card, .theme-btn {
     --pill-bg: rgba(2, 132, 199, 0.08);
 }
 
-/* ==========================================================================
+/* 
    2. BASE STYLES & RESET
-   ========================================================================== */
+   */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -219,9 +212,9 @@ a:hover {
     color: var(--accent-hover);
 }
 
-/* ==========================================================================
+/* 
    3. NAVIGATION BAR (Header)
-   ========================================================================== */
+   */
 header {
     position: fixed;
     top: 0;
@@ -298,9 +291,9 @@ header {
     transform: translateY(-1px);
 }
 
-/* ==========================================================================
+/* 
    4. HERO SECTION
-   ========================================================================== */
+ */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -415,9 +408,9 @@ header {
     object-fit: cover;
 }
 
-/* ==========================================================================
+/*
    5. SECTIONS COMMON PLATES
-   ========================================================================== */
+   */
 section {
     padding: 100px 0 60px 0;
 }
@@ -442,9 +435,9 @@ section {
     border-radius: 4px;
 }
 
-/* ==========================================================================
+/* 
    6. PROJECTS GRID (Card Aesthetics)
-   ========================================================================== */
+   */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -511,9 +504,9 @@ section {
     margin-bottom: 20px;
 }
 
-/* ==========================================================================
+/* 
    7. ABOUT & EDUCATION SECTIONS
-   ========================================================================== */
+  */
 .about-content {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -595,9 +588,9 @@ section {
     padding-top: 20px;
 }
 
-/* ==========================================================================
+/* 
    8. SKILLS PILLS
-   ========================================================================== */
+  */
 .skills-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -644,9 +637,9 @@ section {
     transform: translateY(-2px);
 }
 
-/* ==========================================================================
+/* 
    9. CONTACT FORM & LAYOUT
-   ========================================================================== */
+   */
 .contact-wrapper {
     display: grid;
     grid-template-columns: 1fr 1.3fr;
@@ -720,10 +713,15 @@ section {
     border-color: var(--accent);
     box-shadow: 0 0 0 3px var(--accent-glow);
 }
+.contact-card:hover {
+            transform: translateY(-5px);
+            border-color: #ec4899 !important;
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.15) !important;
+        }
 
-/* ==========================================================================
+/* 
    10. MEDIA QUERIES (Mobile Responsiveness)
-   ========================================================================== */
+    */
 @media (max-width: 968px) {
     .hero-wrapper {
         flex-direction: column-reverse;

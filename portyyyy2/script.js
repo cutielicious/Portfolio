@@ -1,6 +1,6 @@
-/* ==========================================================================
+/* 
    1. LIGHT & DARK MODE CONTROLLER (With Local Storage Memory)
-   ========================================================================== */
+   */
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = document.getElementById('themeToggleBtn');
     const themeBtnText = document.getElementById('themeBtnText');
@@ -28,9 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /* ==========================================================================
+    /*
        2. SMOOTH SCROLLING FOR NAVIGATION LINKS
-       ========================================================================== */
+       */
     const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
     
     navLinks.forEach(link => {
@@ -53,9 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     
-    /* ==========================================================================
+    /*
        3. INTERACTIVE SCROLL ANIMATION (Reveal Cards on Scroll)
-       ========================================================================== */
+      */
     const revealElements = document.querySelectorAll('.project-card, .skills-category, .education-card');
     
     const revealOnScroll = () => {
@@ -81,9 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll(); // Trigger once on load in case elements are already visible
 });
-/* ==========================================================================
+/* 
    CUSTOM CURSOR CONTROLLER
-   ========================================================================== */
+  */
 document.addEventListener('DOMContentLoaded', () => {
     const cursorOuter = document.querySelector('.custom-cursor-outer');
     const cursorInner = document.querySelector('.custom-cursor-inner');
