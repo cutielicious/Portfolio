@@ -3,6 +3,7 @@ html, body, a, button, input, textarea, .project-card, .theme-btn, .tech-pill, .
     cursor: none !important;
 }
 
+
 .custom-cursor-outer, .custom-cursor-inner {
     position: fixed;
     pointer-events: none;
@@ -461,6 +462,7 @@ section {
     box-shadow: none !important;
     filter: none !important;
 }
+
 
 /* --- CONTACT CARD (Cleaned) --- */
 .contact-card {
